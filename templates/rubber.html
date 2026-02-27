@@ -1,4 +1,19 @@
 {% extends 'home-guide.html' %}
+{% from './macros.html' import rec, recb, unrec, unrecb%}
+
 {% block material %}
-<p> This is the guide page for rubber </p>
+<p> Urethane rubber is a bit more difficult to release from molds than silicone, though with some design considerations it's not terribly difficult.</p>
 {% endblock %}
+
+{%block recs%}
+{{rec('ASA', 'Urethane rubbers often release substantial heat as they cure. This means that more heat resistant materials such as ASA are preferable.')}}
+{{recb('PETG', 'PETG is heat resistant and easier to print with than ASA, though with large casts the heat resistance may still not be sufficient.')}}
+{%endblock%}
+
+{%block unrecs%}
+{{unrecb('PLA', 'PLA can work with small models, but with larger models PLA\'s complete lack of heat resistance makes molds incredibly difficult to release, asssuming they can be released at all.')}}
+{{unrec('TPU', 'TPU\'s flexibility can easily come close to that of a urethane rubber, making it very hard to release the part. It also has limited heat resistance making this issue worse.')}}
+{%endblock%}
+
+{%block process%}
+{%endblock%}

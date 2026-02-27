@@ -1,4 +1,20 @@
 {% extends 'home-guide.html' %}
+{% from './macros.html' import rec, recb, unrec, unrecb%}
+
 {% block material %}
-<p> This is the guide page for resin</p>
+<p> Resins are rigid and often release substantial heat in the curing process, making them harder to work with than many other casting materials</p>
 {% endblock %}
+
+{%block recs%}
+{{rec('ASA', 'ASA was the only material we got to successfully release a resin cast. Unless you are using a particularly slow cure resin you absolutely need the heat resistance offered by ASA.')}}
+{{recb('Silicone', 'A solid alternative option for casting resin parts is to print the part positive, make a negative mold of that part with silicone, and then cast the resin in that silicone mold. It\'s a bit of a process but will likely produce the best results.')}}
+{%endblock%}
+
+{%block unrecs%}
+{{unrecb('TPU', 'At first glance, TPU seems appealing for resin. It\'s flexibility sounds as though it will help release the rigid resin easier, however we found that the TPU simply fuses to the hot resin and becomes imposssible to release, even with destructive force.')}}
+{{unrec('PETG', 'PETG might have some heat resistance, but it still was unable to withstand the needs of the resin.')}}
+{{unrecb('PLA', 'PLA is so minimally heat resistant it is unlikely that even slow cure resins would be compatible with it. If you\'re casting resin, PLA is simply insufficient.')}}
+{%endblock%}
+
+{%block process%}
+{%endblock%}
