@@ -1,13 +1,14 @@
-Silicone_Type,3D_Print_Material,Print_Texture,Curing_Time_Hours,Adhesion_Score(1-10),Tear_Resistance(1-10),Bubble_Formation(1-10,lower_better),Overall_Performance(1-10)
-Silicone A,PLA,Smooth,6,8,7,2,8
-Silicone A,PLA,Rough,6,6,7,3,7
-Silicone A,PETG,Smooth,6,7,8,2,8
-Silicone B,PLA,Smooth,4,5,9,4,7
-Silicone B,PLA,Rough,4,4,8,5,6
-Silicone B,PETG,Smooth,4,6,9,3,7
-Silicone C,ABS,Smooth,8,7,6,2,7
-Silicone C,ABS,Rough,8,5,6,3,6
-Silicone C,Resin,Smooth,8,9,7,1,9
-Silicone D,Resin,Smooth,10,10,8,1,10
-Silicone D,PETG,Rough,10,7,9,2,8
-Silicone D,PLA,Smooth,10,9,8,1,9
+Silicone_Type,3D_Print_Material,Workability(1-5), Fine Detail & Accuracy(1-5),Mechanical Strength(1-5),Mold Reusability(1-5), Notes
+
+Silicone Rubber,PLA,5,5,3,3,Some damage to mold
+Silicone Rubber,PETG,5,5,3,5,None.
+Silicone Rubber,ASA,5,3,3,5,ASA reacted with the sealing agent making the mold slightly bubbly
+Silicone Rubber,TPU,4,2,3,4,TPU ad trouble releasing
+Urethane Rubber,PLA,4,4,4,5,Urethane Rubber is significantley more difficut to demold than Silicone but it is much harder
+Urethane Rubber,PETG,4,4,4,5,None.
+Urethane Rubber,ASA,5,5,5,5, ASA released easily
+Urethane Rubber,TPU,2,4,4,5, Very hard to demold
+Urethane Resin,PLA,1,1,1,1,Resin and Mold fused together
+Urethane Resin,PETG,1,1,1,1,Resin and Mold fused together
+Urethane Resin,ASA,3,4,5,3, ASA's higher heat resist prevented it from fusing with the resin 
+Urethane Resin,TPU,2,1,1,2, Unable to demold but potentially usable
