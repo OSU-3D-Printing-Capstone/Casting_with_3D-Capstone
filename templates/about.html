@@ -2,42 +2,131 @@
 
 {% block head %}
 <style>
-	.div_a {
-		width: 100%;
-		padding: 5px;
-		background-color: white;
-		text-align: center;
-	}
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 
-	.div_b {
-		width: 100%;
-		padding: 5px;
-		background-color: #fee9e1;
-		text-align: center;
-	}
+    .page-wrapper {
+        width: 100%;
+        height: 91%;
+        overflow: hidden;
+        display: flex;
+        position: absolute;
+    }
 
+    .left-panel {
+        width: 55%;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+    }
 
+    .right-panel {
+        width: 45%;
+        background-color: lightblue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .section {
+        width: 100%;
+        padding: 40px 50px;
+        text-align: center;
+    }
+
+    .section-light {
+        background-color: #ffffff;
+    }
+
+    .section-tinted {
+        background-color: #fee9e1;
+    }
+
+    .section h1 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+        color: #222;
+    }
+
+    .section p {
+        font-size: 0.97rem;
+        line-height: 1.75;
+        color: #444;
+        max-width: 560px;
+        margin: 0 auto;
+    }
+
+    .section p + p {
+        margin-top: 12px;
+    }
 </style>
-{%endblock%}
+{% endblock %}
 
 {% block body %}
-<div style="width: 100%;height:91%; overflow:hidden;display:flex;position:absolute;">
-<div style="width:55%;">
-<div class="div_a">
-	<h1> About Us:</h1>
-	<p> Here is a little section talking about the people behind the project</p>
+<div class="page-wrapper">
+
+    <div class="left-panel">
+
+        <div class="section section-light">
+            <h1>Behind the project</h1>
+            <p>Person 1</p>
+			<p>Person 2</p>
+			<p>Person 3</p>
+            <p>Stakeholder — Stakeholder Name</p>
+        </div>
+
+        <div class="section section-tinted">
+            <h1>About The Project</h1>
+            <p>
+                The rise of affordable 3D printing has opened new opportunities in silicone mold making a process
+                that has traditionally been costly and time-consuming. By using 3D printed masters instead of
+                CNC machined or hand sculpted patterns, designers and engineers can significantly reduce both cost
+                and lead time.
+            </p>
+            <p>
+                However, a critical challenge remains: not all 3D printing materials are equally suited for silicone
+                casting. Factors such as surface roughness, porosity, dimensional accuracy, and chemical compatibility
+                vary greatly across material types like FDM, SLA, and SLS with cure inhibition from certain resins
+                being a particularly well known issue.
+            </p>
+            <p>
+                This project aims to fill that gap by empirically evaluating candidate materials and delivering
+                clear, evidence based recommendations making silicone mold making more accessible, efficient,
+                and reproducible across industries ranging from product design to medical prototyping.
+            </p>
+        </div>
+
+         <div class="section section-light">
+            <h1>Works Cited</h1>
+            <ol class="citations">
+                <li>
+                    Dizon, John Ryan Cortez, et al. "3D Printed Injection Molds Using Various 3D Printing Technologies."
+                    <em>Materials Science Forum</em>, vol. 1005, Trans Tech Publications Ltd, 2020.
+                </li>
+                <li>
+                    Snelling, Dean A., Christopher B. Williams, and Alan P. Druschitz. "Mechanical and Material Properties
+                    of Castings Produced via 3D Printed Molds." <em>Additive Manufacturing</em>, vol. 27, 2019, pp. 199–207.
+                </li>
+                <li>
+                    van der Borg, Guus, et al. "PLA 3D Printing as a Straightforward and Versatile Fabrication Method
+                    for PDMS Molds." <em>Polymers</em>, vol. 15, no. 6, 2023, p. 1498.
+                </li>
+                <li>
+                    Smooth-On, Inc. <em>Step-by-Step Mold Making and Casting Tutorials</em>.
+                    <a href="https://www.smooth-on.com/tutorials/" target="_blank">https://www.smooth-on.com/tutorials/</a>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+
+    <div class="right-panel">
+        <p>(an image will go here)</p>
+    </div>
+
 </div>
-<div class="div_b">
-	<h1> About The Project:</h1>
-	<p> Here is a little bit of information about our motivations and goals for this project
-</div>
-<div class="div_a">
-	<h1> Cited informatin:</h1>
-	<p> Here is some resources we found helpful in our research <p>
-</div>
-</div>
-<div style="width:45%;background-color:lightblue;">
-	<p>(an image will go here)</p>
-</div>
-</div>
-{%endblock%}
+{% endblock %}
