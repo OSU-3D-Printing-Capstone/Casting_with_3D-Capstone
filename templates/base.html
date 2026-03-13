@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cast 3D - The Cast 3D Printing Guide</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
-    {% block head %}{% endblock %}
-</head>
-<body>
-    <div class="site-shell">
-        <header class="site-header">
-            <div class="site-header-inner">
-                <div id="title">Cast 3D</div>
-                <nav id="links">
-                    <button class="linkbtn {% if request.endpoint == 'home' %}active{% endif %}"
-                        onclick="location.href='{{ url_for("home") }}'">Guide</button>
-                    <button class="linkbtn {% if request.endpoint == 'about' %}active{% endif %}"
-                        onclick="location.href='{{ url_for("about") }}'">About</button>
-                    <button class="linkbtn {% if request.endpoint == 'process' %}active{% endif %}"
-                        onclick="location.href='{{ url_for("process") }}'">Process</button>
-                    <button class="linkbtn {% if request.endpoint == 'all_data' %}active{% endif %}"
-                        onclick="location.href='{{ url_for("all_data") }}'">Data</button>
-                </nav>
-            </div>
-        </header>
 
-        <main class="page-container">
-            {% block body %}{% endblock %}
-        </main>
-    </div>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Cast 3D - The Cast 3D Printing Guide</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+	{% block head %}{% endblock %}
+</head>
+
+<body>
+	<div class="site-shell">
+		<header class="site-header">
+			<div class="site-header-inner">
+				<div id="title">Cast 3D</div>
+				<nav id="links">
+					<a class="linkbtn {% if request.endpoint == 'home' %}active{% endif %}"
+						href="{{ url_for('home') }}">Guide</a>
+
+					<a class="linkbtn {% if request.endpoint == 'about' %}active{% endif %}"
+						href="{{ url_for('about') }}">About</a>
+
+					<a class="linkbtn {% if request.endpoint == 'process' %}active{% endif %}"
+						href="{{ url_for('process') }}">Process</a>
+
+					<a class="linkbtn {% if request.endpoint == 'all_data' %}active{% endif %}"
+						href="{{ url_for('all_data') }}">Data</a>
+				</nav>
+			</div>
+		</header>
+
+		<main class="page-container">
+			{% block body %}{% endblock %}
+		</main>
+	</div>
 </body>
+
 </html>

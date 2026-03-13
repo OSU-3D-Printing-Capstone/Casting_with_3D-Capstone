@@ -126,6 +126,13 @@ h4 {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.14);
 }
 
+.linkbtn,
+.linkbtn:hover,
+.linkbtn:visited,
+.linkbtn:active {
+    text-decoration: none;
+}
+
 .page-container {
     max-width: var(--max-width);
     margin: 0 auto;
