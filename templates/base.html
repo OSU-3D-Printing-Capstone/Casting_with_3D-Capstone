@@ -1,81 +1,33 @@
-<!-- This page is the base to all pages if want to have similar things throughout add to this file. -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cast 3D - The Cast 3D Printing Guide</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
-
-    {% block head%}{%endblock%}
-    
-    <!-- Add nav bar to all pages here -->
-
-<style>
-	body {
-		margin: 0;
-		font-family: Arial, sans-serif;
-	}
-
-	/* Title bar */
-	header {
-		padding: 0px;
-		width: 100%;
-		height: 9vh;
-		display: flex;
-		background-color: #f65c25;
-	}
-	.linkbtn {
-		background-color: #ea450a;
-		color: black;
-		font-size: 20px;
-		height: 100%;
-		border-width: 0px;
-		border-color: black;
-		cursor: pointer;
-		width: 12%;
-	}
-
-	.linkbtn:hover {
-		background-color: #c6471a;
-	}
-
-	#title {
-		width: 35%;
-		color: black;
-		text-align: center;
-		font-size: 4em;
-		padding: 0.1em;
-		font-weight: bold;
-	}
-
-	#links {
-		width: 100%;
-		text-align: right;
-	}
-
-</style>
+    {% block head %}{% endblock %}
 </head>
-<title>Cast 3D - The Cast 3D Printing Guide</title>
 <body>
-	<div>
-		<header>
-			<div id="title">
-				Cast 3D
-			</div>
-			<div id="links">
-				<button class="linkbtn" 
-				onclick="location.href='{{url_for("home")}}'"> Guide </button>
-				<button class="linkbtn" 
-				onclick="location.href='{{url_for("about")}}'"> About </button>
-				<button class="linkbtn" 
-				onclick="location.href='{{url_for("process")}}'"> Process </button>
-				<button class="linkbtn" 
-				onclick="location.href='{{url_for("all_data")}}'"> Data </button>
-			</div>
-			<div style="width: 5%;"></div>
-		</header>
-	</div>
-    {% block body%}{% endblock %}
+    <div class="site-shell">
+        <header class="site-header">
+            <div class="site-header-inner">
+                <div id="title">Cast 3D</div>
+                <nav id="links">
+                    <button class="linkbtn {% if request.endpoint == 'home' %}active{% endif %}"
+                        onclick="location.href='{{ url_for("home") }}'">Guide</button>
+                    <button class="linkbtn {% if request.endpoint == 'about' %}active{% endif %}"
+                        onclick="location.href='{{ url_for("about") }}'">About</button>
+                    <button class="linkbtn {% if request.endpoint == 'process' %}active{% endif %}"
+                        onclick="location.href='{{ url_for("process") }}'">Process</button>
+                    <button class="linkbtn {% if request.endpoint == 'all_data' %}active{% endif %}"
+                        onclick="location.href='{{ url_for("all_data") }}'">Data</button>
+                </nav>
+            </div>
+        </header>
+
+        <main class="page-container">
+            {% block body %}{% endblock %}
+        </main>
+    </div>
 </body>
 </html>

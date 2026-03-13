@@ -1,118 +1,61 @@
 {% extends 'base.html' %}
 
-{% block head %}
-
-<style>
-	body {
-		margin: 0;
-		font-family: Arial, sans-serif;
-		display: flex;
-		flex-direction: column;
-	}
-
-
-	/* Main layout */
-	main {
-		flex: 1;
-		display: flex;
-	}
-
-	/* Left column */
-	.left-column {
-		flex-basis: 30%;
-		background-color: #fee9e1;
-		padding: 20px;
-		box-sizing: border-box;
-		border-right: 2px solid #ddd;
-		min-height: 91vh;
-	}
-
-	/* Right column */
-	.right-column {
-		flex-basis: 70%;
-		padding: 20px;
-		justify-content: center;
-		box-sizing: border-box;
-	}
-
-	select, .dynamic-textbox {
-		width: 100%;
-		padding: 10px;
-		font-size: 1em;
-		margin-top: 10px;
-	}
-
-	@media (max-width: 768px) {
-		main {
-			flex-direction: column;
-		}
-	}
-</style>
-
-{% endblock %}
-
 {% block body %}
+<div class="home-layout">
+    <aside class="left-column card-soft">
+        <span class="badge">Material Guide</span>
+        <h1>Casting with 3D Prints</h1>
 
-<main>
-<div style="display:flex">
-	<!-- Left Column -->
-	<div class="left-column">
-		<h1>Casting with 3D Prints</h1>
+        <p>
+            3D printing is a powerful way to create complex shapes quickly, but the printed material you choose can
+            strongly affect mold quality, release behavior, and final cast performance. This guide helps visitors
+            compare options and choose better material pairings for common casting workflows.
+        </p>
 
-		<p>
-		3D Printing is an immensely useful technology that can produce 
-		complex objects with ease. However, there are limitations to 
-		materials and their properties. This page acts as a guide to our
-		project which focuses on finding the optimal solution for 
-		creating casting molds with 3D printing.
-		</p>
+        <label for="material">Choose the casting material you would like to work with:</label>
+        <select id="material" class="material-select" aria-label="Choose casting material">
+            <option value="">Choose a Material</option>
+            <option value="?material=silicone">Silicone</option>
+            <option value="?material=rubber">Rubber</option>
+            <option value="?material=resin">Resin</option>
+        </select>
+    </aside>
 
-		<label for="material">Choose the casting material you would like to work with:</label>
-		<select id="material">
-			<option value="">Choose a Material</option>
-			<option value="?material=silicone">Silicone</option>
-			<option value="?material=rubber">Rubber</option>
-			<option value="?material=resin">Resin</option>
-		</select>
-	</div>
-
-	<!-- Right Column -->
-	<div class="right-column">
-	  {% block guide %}
-	  {% endblock %}
-		<!--<p id="dynamicBox" class="dynamic-textbox"></p>-->
-	</div>
+    <section class="right-column" id="guide-panel">
+        {% block guide %}{% endblock %}
+    </section>
 </div>
-</main>
-
 
 <script>
 const material = document.getElementById('material');
-//update selector box to current material
+const guidePanel = document.getElementById('guide-panel');
+
 function materialContinuity() {
-    var mat = window.location.href.split('?')[1];
-    if(!mat)
-      mat = "";
-    else
-      mat = '?' + mat;
-    const allMats = Array.from(material.options).map(option=>option.value);
-    //console.log(allMats);
-    //console.log(mat);
-    for(let i = 0; i < 4; i++){
-      if(allMats[i] == mat){
-        material[i].selected = true;
-        return;
-    }}   
+    let mat = window.location.search || '';
+    const allMats = Array.from(material.options).map(option => option.value);
+
+    for (let i = 0; i < allMats.length; i++) {
+        if (allMats[i] === mat) {
+            material.options[i].selected = true;
+            return;
+        }
+    }
 }
+
 materialContinuity();
 
-//change/reload url if new material selected
 material.addEventListener('change', () => {
-    var val = material.value,
-        url   = window.location.href.split('?')[0];
+    const val = material.value;
+    const url = window.location.href.split('?')[0];
 
-    window.location.href = url + val;
+    if (guidePanel) {
+        guidePanel.style.opacity = '0';
+        guidePanel.style.transform = 'translateY(8px)';
+    }
+
+    setTimeout(() => {
+        window.location.href = url + val;
+    }, 160);
 });
 </script>
-
 {% endblock %}

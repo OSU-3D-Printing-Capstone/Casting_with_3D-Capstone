@@ -1,127 +1,118 @@
 {% extends 'base.html' %}
 
-{% block head %}
-<style>
-	.div_a {
-		width: 100%;
-		padding: 5px;
-		background-color: white;
-		text-align: left;
-		display: flex;
-	}
-
-	.div_b {
-		width: 100%;
-		padding: 5px;
-		background-color: #fee9e1;
-		text-align: left;
-		display: flex;
-	}
-
-	.section {
-		text-align: center;
-		width: 17%;
-	}
-
-	.content {
-		width: 60%;
-	}
-</style>
-{%endblock%}
-
 {% block body %}
-<div class="div_b">
-	<div class="section">
-		<h1> Casting Material Choices</h1>
-	</div>
-	<div class="content">
-		<p> For our casting materials, we decided that the hardness of the material would be the most important
-			property, so we selected a variety of hardnesses, and a mold release agent to go with them. <br> They had
-			thefollowing Shore hardness: <br> Silicone Rubber - 10A <br> Urethane Rubber - 60A <br> Urethane Resin - 80D
-			<br>The exact product we used is avalible at: <a
-				href="https://www.smooth-on.com/products/">https://www.smooth-on.com/products/</a>
-		</p>
-	</div>
-</div>
-<div class="div_a">
-	<div class="section">
-		<h1> Molding Material Choices</h1>
-	</div>
-	<div class="content">
-		<p> 4 Molding Materials were used they are:
-			<br>PLA - Basic/default material, cheap and generally well rounded material.
-			<br>PETG - common material with some different material properties to PLA (such as heat resistance, layer
-			adhesion, and surface finish).
-			<br>TPU - A flexible material, while it's harder to print with the flex might make mold releasing easier.
-			<br>ASA - We want to use ASA as it is known for it's ability to be smoothed with the use of acetone, which
-			might help get better casts that release easier with eliminated layer lines and its high heat resistance.
-		</p>
-	</div>
-</div>
-<div class="div_b">
-	<div class="section">
-		<h1> 3D Printing</h1>
-	</div>
-	<div class="content">
-		<p> The 3D printing settings were kept pretty basic throught the process.
-			<br> We used a layer height of 0.2mm, 15% infill and a nozzle diameter of 0.4mm.<br>
-			All other temperature settings for beds and nozzels were set to the reccommended settings for each material.
-			<br> Prints were completed Bambu Labs X1 Carbon,A1 and P1P printers.
-	</div>
-</div>
-<div class="div_a">
-	<div class="section">
-		<h1> Processing Molds</h1>
-	</div>
-	<div class="content">
-		<p> Many of our molds required very little post processing, however the TPU was extremly stringy and a heat gun
-			was used to melt away the strings. </p>
-	</div>
-</div>
-<div class="div_b">
-	<div class="section">
-		<h1> Casting </h1>
-	</div>
-	<div class="content">
-		<p> For casting, we followed the reccommended mixing ratios for each material, and we also made sure to use a
-			mold release agent on all of our molds to ensure that the castings would release easily.
-			<br>Unfortunatley we did not have access to a vacuum chamber to degas the materials before pouring them into
-			the molds.
-		</p>
-		<br> Here is the release agent we used: <a
-			href="https://www.amazon.com/Super-Seal-Ease-Release-2oz/dp/B00ETBM2IY">
-			https://www.amazon.com/Super-Seal-Ease-Release-2oz/dp/B00ETBM2IY
-		</a>
+<div class="process-stack">
+    <section class="process-row card">
+        <div class="process-step">
+            <span class="badge" style="background: rgba(255,255,255,0.18); color: white;">Step 1</span>
+            <h2>Casting Material Choices</h2>
+        </div>
+        <div class="process-copy">
+            <p>
+                For our casting materials, hardness was the most important variable, so we selected a range of
+                materials and paired them with a mold release agent.
+            </p>
+            <p>
+                The materials used had the following Shore hardness values: Silicone Rubber — 10A, Urethane Rubber —
+                60A, and Urethane Resin — 80D. The product family used can be found at
+                <a href="https://www.smooth-on.com/products/" target="_blank">Smooth-On Products</a>.
+            </p>
+        </div>
+    </section>
 
-		<p>
-	</div>
-</div>
-<div class="div_a">
-	<div class="section">
-		<h1> Demolding</h1>
-	</div>
-	<div class="content">
-		<p>Here is a description of the categories evaluated during the demolding process:
-			<br>Workability - how easy the casting materials were to work with, such as how easy they were to mix and
-			pour. As well as how well they came out of the mold.
-			<br>Fine Detail & Accuracy - how well the casting material captured fine details of the mold, were there any
-			imperfections in the castings, and how accurate were the dimensions of the castings.
-			<br>Mechanical Strength - how strong the castings were, did they break easily, and how well did they hold up
-			to stress.
-			<br>Mold Reusability - how well the molds held up to multiple castings, did they degrade quickly or were
-			they able to be used multiple times without issue.
-		</p>
-	</div>
-</div>
-<div class="div_b">
-	<div class="section">
-		<h1> Other considerations</h1>
-	</div>
-	<div class="content">
-		<p> Casting Urethane Resin was almost impossible, the material released significant heat and fused with many of
-			the casts.
-			It may be helpful to chill the molds beforehand. </p>
-	</div>
-</div>
+    <section class="process-row card">
+        <div class="process-step">
+            <span class="badge" style="background: rgba(255,255,255,0.18); color: white;">Step 2</span>
+            <h2>Molding Material Choices</h2>
+        </div>
+        <div class="process-copy">
+            <p>
+                Four molding materials were used: PLA, PETG, TPU, and ASA.
+            </p>
+            <p>
+                PLA served as the baseline. PETG provided a useful comparison because of its heat resistance, layer
+                adhesion, and surface finish. TPU was included to see whether flexibility improved release. ASA was
+                chosen because it can be acetone smoothed, which may reduce visible layer lines and improve release.
+            </p>
+        </div>
+    </section>
 
-{%endblock%}
+    <section class="process-row card">
+        <div class="process-step">
+            <span class="badge" style="background: rgba(255,255,255,0.18); color: white;">Step 3</span>
+            <h2>3D Printing</h2>
+        </div>
+        <div class="process-copy">
+            <p>
+                Print settings were kept relatively consistent across the process: 0.2 mm layer height, 15% infill,
+                and a 0.4 mm nozzle diameter.
+            </p>
+            <p>
+                Bed and nozzle temperatures followed the recommended settings for each material. Prints were completed
+                on Bambu Labs X1 Carbon, A1, and P1P printers.
+            </p>
+        </div>
+    </section>
+
+    <section class="process-row card">
+        <div class="process-step">
+            <span class="badge" style="background: rgba(255,255,255,0.18); color: white;">Step 4</span>
+            <h2>Processing Molds</h2>
+        </div>
+        <div class="process-copy">
+            <p>
+                Many molds required very little post-processing. TPU prints, however, were especially stringy, so a
+                heat gun was used to clean up excess strands before casting.
+            </p>
+        </div>
+    </section>
+
+    <section class="process-row card">
+        <div class="process-step">
+            <span class="badge" style="background: rgba(255,255,255,0.18); color: white;">Step 5</span>
+            <h2>Casting</h2>
+        </div>
+        <div class="process-copy">
+            <p>
+                Casting materials were mixed according to the recommended ratios, and a mold release agent was applied
+                to all molds to support cleaner demolding.
+            </p>
+            <p>
+                A vacuum chamber was not available, so the materials were not degassed before pouring. The release
+                agent used is available here:
+                <a href="https://www.amazon.com/Super-Seal-Ease-Release-2oz/dp/B00ETBM2IY" target="_blank">Ease Release Agent</a>.
+            </p>
+        </div>
+    </section>
+
+    <section class="process-row card">
+        <div class="process-step">
+            <span class="badge" style="background: rgba(255,255,255,0.18); color: white;">Step 6</span>
+            <h2>Demolding Evaluation</h2>
+        </div>
+        <div class="process-copy">
+            <p>
+                The demolding phase focused on four categories: workability, fine detail and accuracy, mechanical
+                strength, and mold reusability.
+            </p>
+            <p>
+                These categories helped evaluate how easy the materials were to mix and pour, how well fine features
+                were preserved, whether castings held up under stress, and how well molds survived repeated use.
+            </p>
+        </div>
+    </section>
+
+    <section class="process-row card">
+        <div class="process-step">
+            <span class="badge" style="background: rgba(255,255,255,0.18); color: white;">Step 7</span>
+            <h2>Other Considerations</h2>
+        </div>
+        <div class="process-copy">
+            <p>
+                Urethane resin proved especially difficult to cast because the material released significant heat and
+                fused with several molds. Pre-chilling molds may be worth testing in future iterations.
+            </p>
+        </div>
+    </section>
+</div>
+{% endblock %}

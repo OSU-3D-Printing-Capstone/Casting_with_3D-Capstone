@@ -1,51 +1,50 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<style>
-	tr{
-		padding: 10px;
-	}
-
-</style>
-{%endblock%}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+{% endblock %}
 
 {% block body %}
-    <title>DataTables Example</title>
+<section class="data-header">
+    <div>
+        <span class="badge">Dataset</span>
+        <h1>Project Data</h1>
+        <p>
+            Browse, sort, and search the collected results below. The table styling now matches the rest of the site
+            so the data page feels like part of the same experience instead of a separate tool.
+        </p>
+    </div>
+</section>
 
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" 
-          href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-</head>
-<body>
-
-<h1>Data</h1>
-<table id="myTable" class="display">
-    <thead>
-        <tr>
-            {% for header in headers %}
-            <th>{{ header }}</th>
+<section class="data-shell card">
+    <table id="myTable" class="display">
+        <thead>
+            <tr>
+                {% for header in headers %}
+                <th>{{ header }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                {% for header in headers %}
+                <td>{{ row[header] }}</td>
+                {% endfor %}
+            </tr>
             {% endfor %}
-        </tr>
-    </thead>
-    <tbody>
-        {% for row in rows %}
-        <tr>
-            {% for header in headers %}
-            <td>{{ row[header] }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</section>
+
 <script>
     $(document).ready(function() {
-        $('#myTable').DataTable();
+        $('#myTable').DataTable({
+            pageLength: 10,
+            responsive: true
+        });
     });
 </script>
-{%endblock%}
+{% endblock %}
