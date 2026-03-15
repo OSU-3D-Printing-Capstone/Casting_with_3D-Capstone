@@ -35,6 +35,34 @@
     </div>
 </section>
 
+<!-- Rating Legend -->
+<div class="card-soft" style="padding: 1rem 1.5rem; margin-bottom: 1.5rem;">
+    <strong>Rating Guide</strong>
+    <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 0.75rem;">
+        <div>
+            <span style="color:#e8501a;">★★★★★</span> <strong>5</strong> — Excellent
+        </div>
+        <div>
+            <span style="color:#e8501a;">★★★★</span><span style="color:#ccc;">★</span> <strong>4</strong> — Good
+        </div>
+        <div>
+            <span style="color:#e8501a;">★★★</span><span style="color:#ccc;">★★</span> <strong>3</strong> — Average
+        </div>
+        <div>
+            <span style="color:#e8501a;">★★</span><span style="color:#ccc;">★★★</span> <strong>2</strong> — Poor
+        </div>
+        <div>
+            <span style="color:#e8501a;">★</span><span style="color:#ccc;">★★★★</span> <strong>1</strong> — Very Poor
+        </div>
+    </div>
+    <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 1rem; font-size: 0.875rem; color: #666;">
+        <div><strong>Workability</strong> — How easy the material is to print and handle</div>
+        <div><strong>Fine Detail & Accuracy</strong> — How well the mold captures small features</div>
+        <div><strong>Mechanical Strength</strong> — Durability of the final cast</div>
+        <div><strong>Mold Reusability</strong> — How many times the mold can be reused</div>
+    </div>
+</div>
+
 <section class="data-shell card" id="results-section">
     <p id="loading-msg">Select filters above and press Filter.</p>
     <table id="compare-table" style="display:none; width:100%; border-collapse:collapse;">
@@ -62,6 +90,14 @@
 </div>
 
 <script>
+const ratingCols = ['Workability(1-5)', 'Fine Detail & Accuracy(1-5)', 'Mechanical Strength(1-5)', 'Mold Reusability(1-5)'];
+
+function toStars(val) {
+    const num = parseInt(val);
+    if (isNaN(num)) return val;
+    return '★'.repeat(num) + '☆'.repeat(5 - num);
+}
+
 document.getElementById('filter-btn').addEventListener('click', function() {
     const silicone = document.getElementById('silicone-filter').value;
     const print = document.getElementById('print-filter').value;
@@ -90,7 +126,9 @@ document.getElementById('filter-btn').addEventListener('click', function() {
             ).join('') + '</tr>';
             body.innerHTML = data.map(row =>
                 '<tr>' + keys.map(k =>
-                    `<td style="padding:8px;border-bottom:1px solid #eee;">${row[k] ?? ''}</td>`
+                    `<td style="padding:8px;border-bottom:1px solid #eee;">${
+                        ratingCols.includes(k.trim()) ? `<span style="color:#e8501a;letter-spacing:2px;">${toStars(row[k])}</span>` : (row[k] ?? '')
+                    }</td>`
                 ).join('') + '</tr>'
             ).join('');
             table.style.display = 'table';
@@ -122,7 +160,9 @@ document.getElementById('toggle-all-data').addEventListener('click', function() 
                 body.innerHTML = data.map((row, i) =>
                     `<tr style="background:${i % 2 === 0 ? '#f5f9ff' : '#ffffff'}">` +
                     keys.map(k =>
-                        `<td style="padding:8px;border-bottom:1px solid #eee;">${row[k] ?? ''}</td>`
+                        `<td style="padding:8px;border-bottom:1px solid #eee;">${
+                            ratingCols.includes(k.trim()) ? `<span style="color:#e8501a;letter-spacing:2px;">${toStars(row[k])}</span>` : (row[k] ?? '')
+                        }</td>`
                     ).join('') + '</tr>'
                 ).join('');
                 allDataLoaded = true;
