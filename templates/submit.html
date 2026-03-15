@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<section class="data-header">
+    <div>
+        <span class="badge">Submit</span>
+        <h1>Add Test Result</h1>
+        <p>Submit your own casting test result to contribute to the dataset.</p>
+    </div>
+</section>
+
+<section class="card" style="padding: 1.5rem; max-width: 600px;">
+    <form method="POST" action="/submit">
+
+        <div style="margin-bottom: 1rem;">
+            <label><strong>Casting Material</strong></label><br>
+            <select name="silicone_type" class="material-select" required>
+                <option value="">Choose one</option>
+                <option value="Silicone Rubber">Silicone Rubber</option>
+                <option value="Urethane Rubber">Urethane Rubber</option>
+                <option value="Urethane Resin">Urethane Resin</option>
+            </select>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label><strong>3D Print Material</strong></label><br>
+            <select name="print_material" class="material-select" required>
+                <option value="">Choose one</option>
+                <option value="PLA">PLA</option>
+                <option value="PETG">PETG</option>
+                <option value="ASA">ASA</option>
+                <option value="TPU">TPU</option>
+            </select>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label><strong>Workability (1-5)</strong></label><br>
+            <select name="workability" class="material-select" required>
+                <option value="">Choose one</option>
+                <option value="1">1 — Very Poor</option>
+                <option value="2">2 — Poor</option>
+                <option value="3">3 — Average</option>
+                <option value="4">4 — Good</option>
+                <option value="5">5 — Excellent</option>
+            </select>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label><strong>Fine Detail & Accuracy (1-5)</strong></label><br>
+            <select name="fine_detail" class="material-select" required>
+                <option value="">Choose one</option>
+                <option value="1">1 — Very Poor</option>
+                <option value="2">2 — Poor</option>
+                <option value="3">3 — Average</option>
+                <option value="4">4 — Good</option>
+                <option value="5">5 — Excellent</option>
+            </select>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label><strong>Mechanical Strength (1-5)</strong></label><br>
+            <select name="mechanical_strength" class="material-select" required>
+                <option value="">Choose one</option>
+                <option value="1">1 — Very Poor</option>
+                <option value="2">2 — Poor</option>
+                <option value="3">3 — Average</option>
+                <option value="4">4 — Good</option>
+                <option value="5">5 — Excellent</option>
+            </select>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label><strong>Mold Reusability (1-5)</strong></label><br>
+            <select name="mold_reusability" class="material-select" required>
+                <option value="">Choose one</option>
+                <option value="1">1 — Very Poor</option>
+                <option value="2">2 — Poor</option>
+                <option value="3">3 — Average</option>
+                <option value="4">4 — Good</option>
+                <option value="5">5 — Excellent</option>
+            </select>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+            <label><strong>Notes</strong></label><br>
+            <textarea name="notes" rows="3" style="width:100%; padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc;" placeholder="Any observations about this combination..."></textarea>
+        </div>
+
+        <button type="submit" style="padding: 0.6rem 1.5rem; background-color: #e8501a; color: white; border: none; border-radius: 20px; cursor: pointer; font-size: 1rem;">
+            Submit Result
+        </button>
+
+    </form>
+</section>
+{% endblock %}

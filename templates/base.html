@@ -19,6 +19,8 @@
 						href="{{ url_for('home') }}">Guide</a>
 					<a class="linkbtn {% if request.endpoint == 'compare' %}active{% endif %}"
     					href="{{ url_for('compare') }}">Compare</a>
+					<a class="linkbtn {% if request.endpoint == 'submit' %}active{% endif %}"
+    					href="{{ url_for('submit') }}">Add Data</a>
 					<a class="linkbtn {% if request.endpoint == 'about' %}active{% endif %}"
 						href="{{ url_for('about') }}">About</a>
 
