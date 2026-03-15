@@ -39,21 +39,11 @@
 <div class="card-soft" style="padding: 1rem 1.5rem; margin-bottom: 1.5rem;">
     <strong>Rating Guide</strong>
     <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 0.75rem;">
-        <div>
-            <span style="color:#e8501a;">★★★★★</span> <strong>5</strong> — Excellent
-        </div>
-        <div>
-            <span style="color:#e8501a;">★★★★</span><span style="color:#ccc;">★</span> <strong>4</strong> — Good
-        </div>
-        <div>
-            <span style="color:#e8501a;">★★★</span><span style="color:#ccc;">★★</span> <strong>3</strong> — Average
-        </div>
-        <div>
-            <span style="color:#e8501a;">★★</span><span style="color:#ccc;">★★★</span> <strong>2</strong> — Poor
-        </div>
-        <div>
-            <span style="color:#e8501a;">★</span><span style="color:#ccc;">★★★★</span> <strong>1</strong> — Very Poor
-        </div>
+        <div><span style="color:#e8501a;">★★★★★</span> <strong>5</strong> — Excellent</div>
+        <div><span style="color:#e8501a;">★★★★</span><span style="color:#ccc;">★</span> <strong>4</strong> — Good</div>
+        <div><span style="color:#e8501a;">★★★</span><span style="color:#ccc;">★★</span> <strong>3</strong> — Average</div>
+        <div><span style="color:#e8501a;">★★</span><span style="color:#ccc;">★★★</span> <strong>2</strong> — Poor</div>
+        <div><span style="color:#e8501a;">★</span><span style="color:#ccc;">★★★★</span> <strong>1</strong> — Very Poor</div>
     </div>
     <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 1rem; font-size: 0.875rem; color: #666;">
         <div><strong>Workability</strong> — How easy the material is to print and handle</div>
@@ -127,7 +117,9 @@ document.getElementById('filter-btn').addEventListener('click', function() {
             body.innerHTML = data.map(row =>
                 '<tr>' + keys.map(k =>
                     `<td style="padding:8px;border-bottom:1px solid #eee;">${
-                        ratingCols.includes(k.trim()) ? `<span style="color:#e8501a;letter-spacing:2px;">${toStars(row[k])}</span>` : (row[k] ?? '')
+                        ratingCols.includes(k.trim())
+                            ? `<span style="color:#e8501a;letter-spacing:2px;">${toStars(row[k])}</span>`
+                            : (row[k] ?? '')
                     }</td>`
                 ).join('') + '</tr>'
             ).join('');
@@ -161,7 +153,9 @@ document.getElementById('toggle-all-data').addEventListener('click', function() 
                     `<tr style="background:${i % 2 === 0 ? '#f5f9ff' : '#ffffff'}">` +
                     keys.map(k =>
                         `<td style="padding:8px;border-bottom:1px solid #eee;">${
-                            ratingCols.includes(k.trim()) ? `<span style="color:#e8501a;letter-spacing:2px;">${toStars(row[k])}</span>` : (row[k] ?? '')
+                            ratingCols.includes(k.trim())
+                                ? `<span style="color:#e8501a;letter-spacing:2px;">${toStars(row[k])}</span>`
+                                : (row[k] ?? '')
                         }</td>`
                     ).join('') + '</tr>'
                 ).join('');
