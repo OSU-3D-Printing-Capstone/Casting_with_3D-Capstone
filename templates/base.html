@@ -17,15 +17,15 @@
 				<nav id="links">
 					<a class="linkbtn {% if request.endpoint == 'home' %}active{% endif %}"
 						href="{{ url_for('home') }}">Guide</a>
-
+					<a class="linkbtn {% if request.endpoint == 'compare' %}active{% endif %}"
+    					href="{{ url_for('compare') }}">Compare</a>
 					<a class="linkbtn {% if request.endpoint == 'about' %}active{% endif %}"
 						href="{{ url_for('about') }}">About</a>
 
 					<a class="linkbtn {% if request.endpoint == 'process' %}active{% endif %}"
 						href="{{ url_for('process') }}">Process</a>
 
-					<a class="linkbtn {% if request.endpoint == 'all_data' %}active{% endif %}"
-						href="{{ url_for('all_data') }}">Data</a>
+					
 				</nav>
 			</div>
 		</header>

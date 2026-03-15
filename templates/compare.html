@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<section class="data-header">
+    <div>
+        <span class="badge">Compare</span>
+        <h1>Material Comparison</h1>
+        <p>Filter results by casting material and 3D print filament to compare performance ratings side-by-side.</p>
+    </div>
+</section>
+
+<section class="card-soft" style="padding: 1.5rem; margin-bottom: 1.5rem;">
+    <div style="display:flex; gap: 1rem; flex-wrap: wrap;">
+        <div>
+            <label for="silicone-filter"><strong>Casting Material</strong></label><br>
+            <select id="silicone-filter" class="material-select">
+                <option value="">All</option>
+                {% for st in silicone_types %}
+                <option value="{{ st }}">{{ st }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="print-filter"><strong>3D Print Material</strong></label><br>
+            <select id="print-filter" class="material-select">
+                <option value="">All</option>
+                {% for pm in print_materials %}
+                <option value="{{ pm }}">{{ pm }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div style="align-self: flex-end;">
+            <button id="filter-btn" class="linkbtn active" style="padding: 0.5rem 1.2rem;">Filter</button>
+        </div>
+    </div>
+</section>
+
+<section class="data-shell card" id="results-section">
+    <p id="loading-msg">Select filters above and press Filter.</p>
+    <table id="compare-table" style="display:none; width:100%; border-collapse:collapse;">
+        <thead id="compare-head"></thead>
+        <tbody id="compare-body"></tbody>
+    </table>
+</section>
+
+<!-- All data toggle -->
+<div style="margin-top: 1.5rem;">
+    <button id="toggle-all-data" style="padding: 0.5rem 1.2rem; background-color: #e8501a; color: white; border: none; border-radius: 20px; cursor: pointer; font-size: 1rem;">
+        ▶ View All Data
+    </button>
+</div>
+
+<div id="all-data-section" style="display:none; margin-top: 1rem;">
+    <section class="data-shell card">
+        <span class="badge">Full Dataset</span>
+        <h2 style="margin-top: 0.5rem;">All Test Results</h2>
+        <table id="all-data-table" style="width:100%; border-collapse:collapse;">
+            <thead id="all-data-head"></thead>
+            <tbody id="all-data-body"></tbody>
+        </table>
+    </section>
+</div>
+
+<script>
+document.getElementById('filter-btn').addEventListener('click', function() {
+    const silicone = document.getElementById('silicone-filter').value;
+    const print = document.getElementById('print-filter').value;
+    const params = new URLSearchParams({ silicone_type: silicone, print_material: print });
+
+    document.getElementById('loading-msg').textContent = 'Loading...';
+    document.getElementById('compare-table').style.display = 'none';
+
+    fetch('/api/filter?' + params.toString())
+        .then(r => r.json())
+        .then(data => {
+            const msg = document.getElementById('loading-msg');
+            const table = document.getElementById('compare-table');
+            const head = document.getElementById('compare-head');
+            const body = document.getElementById('compare-body');
+
+            if (!data.length) {
+                msg.textContent = 'No results found.';
+                table.style.display = 'none';
+                return;
+            }
+            msg.textContent = '';
+            const keys = Object.keys(data[0]);
+            head.innerHTML = '<tr>' + keys.map(k =>
+                `<th style="text-align:left;padding:8px;border-bottom:1px solid #ccc;">${k}</th>`
+            ).join('') + '</tr>';
+            body.innerHTML = data.map(row =>
+                '<tr>' + keys.map(k =>
+                    `<td style="padding:8px;border-bottom:1px solid #eee;">${row[k] ?? ''}</td>`
+                ).join('') + '</tr>'
+            ).join('');
+            table.style.display = 'table';
+        })
+        .catch(() => {
+            document.getElementById('loading-msg').textContent = 'Error loading data.';
+        });
+});
+
+let allDataLoaded = false;
+document.getElementById('toggle-all-data').addEventListener('click', function() {
+    const section = document.getElementById('all-data-section');
+    const btn = document.getElementById('toggle-all-data');
+    const isHidden = section.style.display === 'none';
+
+    section.style.display = isHidden ? 'block' : 'none';
+    btn.textContent = isHidden ? '▼ Hide All Data' : '▶ View All Data';
+
+    if (isHidden && !allDataLoaded) {
+        fetch('/api/filter')
+            .then(r => r.json())
+            .then(data => {
+                const head = document.getElementById('all-data-head');
+                const body = document.getElementById('all-data-body');
+                const keys = Object.keys(data[0]);
+                head.innerHTML = '<tr>' + keys.map(k =>
+                    `<th style="text-align:left;padding:8px;border-bottom:2px solid #ccc;">${k}</th>`
+                ).join('') + '</tr>';
+                body.innerHTML = data.map((row, i) =>
+                    `<tr style="background:${i % 2 === 0 ? '#f5f9ff' : '#ffffff'}">` +
+                    keys.map(k =>
+                        `<td style="padding:8px;border-bottom:1px solid #eee;">${row[k] ?? ''}</td>`
+                    ).join('') + '</tr>'
+                ).join('');
+                allDataLoaded = true;
+            });
+    }
+});
+</script>
+{% endblock %}
