@@ -1,83 +1,50 @@
 {% extends 'base.html' %}
 
+{% block head %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+{% endblock %}
+
 {% block body %}
-<div class="about-layout">
-    <div class="about-left">
-        <section class="about-panel card">
-            <span class="badge">Team</span>
-            <h1>Behind the Project</h1>
-            <div class="people-list">
-                <div class="person-pill">Jace Soehl</div>
-                <div class="person-pill">Kyle Thom</div>
-                <div class="person-pill">Michael Balzer</div>
-                <div class="person-pill">Stakeholder — Dean Akin</div>
-            </div>
-        </section>
-
-        <section class="about-panel accent card-soft">
-            <span class="badge">Overview</span>
-            <h2>About the Project</h2>
-            <p>
-                The rise of affordable 3D printing has opened new opportunities in silicone mold making, a process that
-                has traditionally been costly and time-consuming. By using 3D printed masters instead of CNC machined
-                or hand sculpted patterns, designers and engineers can reduce both cost and lead time.
-            </p>
-            <p>
-                A major challenge remains: not all 3D printing materials are equally suited for casting workflows.
-                Surface roughness, porosity, dimensional accuracy, and chemical compatibility can vary significantly
-                across material families such as FDM, SLA, and SLS.
-            </p>
-            <p>
-                This project helps close that gap by evaluating candidate materials and presenting clear,
-                evidence-based recommendations that make mold making more accessible, efficient, and reproducible.
-            </p>
-        </section>
-
-        <section class="about-panel card">
-            <span class="badge">References</span>
-            <h2>Works Cited</h2>
-            <ol class="citations">
-                <li>
-                    Dizon, John Ryan Cortez, et al. "3D Printed Injection Molds Using Various 3D Printing Technologies."
-                    <em>Materials Science Forum</em>, vol. 1005, Trans Tech Publications Ltd, 2020.
-                </li>
-                <li>
-                    Snelling, Dean A., Christopher B. Williams, and Alan P. Druschitz. "Mechanical and Material
-                    Properties of Castings Produced via 3D Printed Molds." <em>Additive Manufacturing</em>, vol. 27,
-                    2019, pp. 199–207.
-                </li>
-                <li>
-                    van der Borg, Guus, et al. "PLA 3D Printing as a Straightforward and Versatile Fabrication Method
-                    for PDMS Molds." <em>Polymers</em>, vol. 15, no. 6, 2023, p. 1498.
-                </li>
-                <li>
-                    Smooth-On, Inc. <em>Step-by-Step Mold Making and Casting Tutorials</em>.
-                    <a href="https://www.smooth-on.com/tutorials/" target="_blank">Smooth-On Tutorials</a>
-                </li>
-            </ol>
-        </section>
+<section class="data-header">
+    <div>
+        <span class="badge">Dataset</span>
+        <h1>Project Data</h1>
+        <p>
+            Browse, sort, and search the collected results below. The table styling now matches the rest of the site
+            so the data page feels like part of the same experience instead of a separate tool.
+        </p>
     </div>
+</section>
 
-    <aside class="about-right">
-        <section class="about-visual card-soft">
+<section class="data-shell card">
+    <table id="myTable" class="display">
+        <thead>
+            <tr>
+                {% for header in headers %}
+                <th>{{ header }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                {% for header in headers %}
+                <td>{{ row[header] }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
 
-            <div class="visual-badge">
-                <span class="badge">Project Focus</span>
-                <h2>3D Printed Casting Tests</h2>
-
-
-                <img src="{{ url_for('static', filename='images/casting_test.jpg') }}" alt="Casting Test Setup"
-                    class="casting-image"
-                    onerror="this.style.display='none'; document.getElementById('image-fallback').style.display='block';">
-
-                <p id="image-fallback" class="image-fallback">
-                    Experimental casting tests comparing PLA, ASA, and PETG printed molds
-                    with various casting materials. The clamps ensure consistent pressure
-                    while curing to evaluate mold performance and durability.
-                </p>
-            </div>
-        </section>
-    </aside>
-
-</div>
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable({
+            pageLength: 10,
+            responsive: true
+        });
+    });
+</script>
 {% endblock %}
