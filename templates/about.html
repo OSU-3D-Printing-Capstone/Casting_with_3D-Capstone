@@ -1,50 +1,275 @@
 {% extends 'base.html' %}
 
-{% block head %}
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-{% endblock %}
-
 {% block body %}
-<section class="data-header">
-    <div>
-        <span class="badge">Dataset</span>
-        <h1>Project Data</h1>
-        <p>
-            Browse, sort, and search the collected results below. The table styling now matches the rest of the site
-            so the data page feels like part of the same experience instead of a separate tool.
-        </p>
-    </div>
-</section>
 
-<section class="data-shell card">
-    <table id="myTable" class="display">
-        <thead>
-            <tr>
-                {% for header in headers %}
-                <th>{{ header }}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in rows %}
-            <tr>
-                {% for header in headers %}
-                <td>{{ row[header] }}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</section>
+{# ── HERO ── #}
+<div class="about-hero card-soft">
+    <div class="about-hero-inner">
+        <span class="badge">About the Project</span>
+        <h1 class="about-hero-title">Cast more. Guess less.</h1>
+        <p class="about-hero-sub">
+            A free, community-powered guide for makers, engineers, and hobbyists who want
+            to combine 3D printing with casting — and actually get it right the first time.
+        </p>
+        <div class="about-hero-actions">
+            <a class="btn-primary" href="{{ url_for('home') }}">Open the Guide →</a>
+            <a class="btn-outline" href="{{ url_for('submit') }}">Contribute Data</a>
+        </div>
+    </div>
+</div>
+
+{# ── MAIN GRID ── #}
+<div class="about-layout">
+    <div class="about-left">
+
+        {# VALUE PROPOSITION #}
+        <section class="about-panel card">
+            <span class="badge">Why it exists</span>
+            <h2>The problem this solves</h2>
+            <p>
+                Consumer 3D printers are affordable and incredibly versatile — but they're
+                limited to a narrow range of plastics. Casting unlocks a much wider material
+                palette: silicone, rubber, resin, and more. The catch? Combining these two
+                processes involves a lot of trial, error, and information scattered across
+                forums and YouTube videos.
+            </p>
+            <p>
+                Different filament types — PLA, ASA, PETG — interact differently with casting
+                compounds. Surface roughness, porosity, chemical compatibility, and dimensional
+                accuracy all vary. Without a reference, you're guessing.
+            </p>
+            <p>
+                <strong>Cast 3D closes that gap.</strong> We ran structured tests, collected
+                community results, and turned everything into a searchable, filterable guide
+                so you can make confident material decisions in minutes, not hours.
+            </p>
+            <div class="value-stats">
+                <div class="value-stat">
+                    <strong>3</strong>
+                    <span>Casting material families covered</span>
+                </div>
+                <div class="value-stat">
+                    <strong>Open</strong>
+                    <span>Source — MIT licensed</span>
+                </div>
+                <div class="value-stat">
+                    <strong>Any</strong>
+                    <span>Experience level welcome</span>
+                </div>
+            </div>
+        </section>
+
+        {# KEY FEATURES #}
+        <section class="about-panel card">
+            <span class="badge">Features</span>
+            <h2>What you can do with it</h2>
+            <div class="features-list">
+                <div class="feature-item">
+                    <div class="feature-icon">🗺️</div>
+                    <div>
+                        <h3>Get a recommendation fast</h3>
+                        <p>
+                            The Guide page walks you through a short decision tree — pick your
+                            casting material and printer type and get a ranked compatibility
+                            recommendation in just a few clicks. No forum diving required.
+                        </p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚖️</div>
+                    <div>
+                        <h3>Compare tests side by side</h3>
+                        <p>
+                            The Compare page lets you drill into individual test results across
+                            mold filament types, casting compounds, and surface finishes — so
+                            you can find the exact data point that matches your setup.
+                        </p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📤</div>
+                    <div>
+                        <h3>Share your own findings</h3>
+                        <p>
+                            Run a test we haven't covered? Upload your results via the Add Data
+                            page. Every contribution makes the guide more useful for the entire
+                            maker community.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {# HOW TO ACCESS #}
+        <section class="about-panel card">
+            <span class="badge">Get started</span>
+            <h2>Try it or run it yourself</h2>
+            <p>The easiest way is to use the live site — no setup, no account needed.</p>
+
+            <div class="access-cards">
+                <div class="access-card access-card--primary">
+                    <div class="access-card-label">Recommended</div>
+                    <h3>Live site</h3>
+                    <p>Visit the hosted version and start exploring immediately.</p>
+                    <a class="btn-primary btn-sm" href="#" style="opacity:0.6; pointer-events:none;">
+                        🔗 &nbsp;Hosting coming soon
+                    </a>
+                </div>
+
+                <div class="access-card">
+                    <div class="access-card-label">Self-hosted</div>
+                    <h3>Run it locally</h3>
+                    <p>Clone the repo and run with Python + Flask on Windows, macOS, or Linux.</p>
+
+                    <div class="code-tabs">
+                        <button class="code-tab active" onclick="showTab(this,'win')">Windows / macOS</button>
+                        <button class="code-tab" onclick="showTab(this,'linux')">Linux</button>
+                    </div>
+
+                    <div class="code-block" id="tab-win">
+                        <span>python -m venv venv</span><br>
+                        <span>.\venv\Scripts\activate</span><br>
+                        <span>pip install Flask Flask-Scss Flask-SQLAlchemy</span><br>
+                        <span>python app.py</span>
+                    </div>
+                    <div class="code-block" id="tab-linux" style="display:none;">
+                        <span>make install</span><br>
+                        <span>make run</span>
+                    </div>
+
+                    <p class="code-note">
+                        <strong>Windows only:</strong> if step 2 fails with a policy error, run
+                        <code>Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass</code>
+                        in PowerShell first.
+                        Then click the <strong>http://</strong> link printed in the terminal to open the site.
+                    </p>
+                    <a class="btn-outline btn-sm" href="https://github.com/OSU-Capstone-2025/Casting_with_3D" target="_blank">View on GitHub →</a>
+                </div>
+            </div>
+        </section>
+
+        {# REFERENCES #}
+        <section class="about-panel card">
+            <span class="badge">References</span>
+            <h2>Works cited</h2>
+            <ol class="citations">
+                <li>
+                    Dizon, John Ryan Cortez, et al. "3D Printed Injection Molds Using Various 3D Printing Technologies."
+                    <em>Materials Science Forum</em>, vol. 1005, Trans Tech Publications Ltd, 2020.
+                </li>
+                <li>
+                    Snelling, Dean A., Christopher B. Williams, and Alan P. Druschitz. "Mechanical and Material
+                    Properties of Castings Produced via 3D Printed Molds." <em>Additive Manufacturing</em>, vol. 27,
+                    2019, pp. 199–207.
+                </li>
+                <li>
+                    van der Borg, Guus, et al. "PLA 3D Printing as a Straightforward and Versatile Fabrication Method
+                    for PDMS Molds." <em>Polymers</em>, vol. 15, no. 6, 2023, p. 1498.
+                </li>
+                <li>
+                    Smooth-On, Inc. <em>Step-by-Step Mold Making and Casting Tutorials</em>.
+                    <a href="https://www.smooth-on.com/tutorials/" target="_blank">smooth-on.com/tutorials</a>
+                </li>
+            </ol>
+        </section>
+
+    </div>
+
+    {# RIGHT SIDEBAR #}
+    <aside class="about-right">
+
+        {# PROJECT IMAGE #}
+        <section class="about-panel card-soft about-visual-panel">
+            <span class="badge">In the lab</span>
+            <h2>Testing in action</h2>
+            <img
+                src="{{ url_for('static', filename='images/casting_test.JPG') }}"
+                alt="Clamps holding 3D-printed molds closed during curing — part of structured compatibility tests comparing PLA, ASA, and PETG molds with silicone, rubber, and resin casting compounds."
+                class="casting-image"
+                onerror="this.style.display='none'; document.getElementById('image-fallback').style.display='block';">
+            <p id="image-fallback" class="image-fallback">
+                Structured casting tests comparing PLA, ASA, and PETG printed molds with
+                silicone, rubber, and resin compounds. Clamps ensure consistent pressure
+                while curing.
+            </p>
+            <p class="image-caption">
+                Clamped molds curing during compatibility testing — results feed directly
+                into the guide's recommendations.
+            </p>
+        </section>
+
+        {# TEAM #}
+        <section class="about-panel card team-card-panel">
+            <span class="badge">Team</span>
+            <h2>Meet the team</h2>
+            <div class="team-list">
+                <div class="team-member">
+                    <div class="team-avatar av-orange">MB</div>
+                    <div class="team-info">
+                        <strong>Michael Balzer</strong>
+                        <span>Full-stack development</span>
+                        <a href="https://github.com/mbalzer" target="_blank" aria-label="Michael Balzer on GitHub">github.com/mbalzer</a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar av-coral">JS</div>
+                    <div class="team-info">
+                        <strong>Jace Soehl</strong>
+                        <span>Backend &amp; database</span>
+                        <a href="https://github.com/jsoehl" target="_blank" aria-label="Jace Soehl on GitHub">github.com/jsoehl</a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar av-dark">KT</div>
+                    <div class="team-info">
+                        <strong>Kyle Thom</strong>
+                        <span>Frontend &amp; design</span>
+                        <a href="https://github.com/kthom" target="_blank" aria-label="Kyle Thom on GitHub">github.com/kthom</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="partner-block">
+                <div class="partner-label">Project partner</div>
+                <div>
+                    <strong class="partner-name">Dean Akin</strong>
+                    <p class="partner-desc">
+                        Domain expert and project advisor. Provided manufacturing expertise,
+                        guided test design, and helped validate our material recommendations.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        {# CONTACT #}
+        <section class="about-panel card contact-panel">
+            <span class="badge">Contact</span>
+            <h2>Questions or feedback?</h2>
+            <p>Found a bug, have a suggestion, or want to report a bad recommendation? We'd love to hear from you.</p>
+            <div class="contact-links">
+                <a class="contact-link" href="https://github.com/OSU-Capstone-2025/Casting_with_3D/issues" target="_blank">
+                    <span class="contact-link-icon">🐛</span>
+                    Open a GitHub Issue
+                </a>
+                <a class="contact-link" href="mailto:capstone-cast3d@oregonstate.edu">
+                    <span class="contact-link-icon">✉️</span>
+                    Email the team
+                </a>
+            </div>
+        </section>
+
+    </aside>
+</div>
 
 <script>
-    $(document).ready(function() {
-        $('#myTable').DataTable({
-            pageLength: 10,
-            responsive: true
-        });
+function showTab(btn, tabId) {
+    document.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    ['win', 'linux'].forEach(id => {
+        var el = document.getElementById('tab-' + id);
+        if (el) el.style.display = id === tabId ? 'block' : 'none';
     });
+}
 </script>
+
 {% endblock %}
